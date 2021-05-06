@@ -1,0 +1,57 @@
+#include <sys/types.h>
+#include <stdio.h>
+#include <sys/stat.h>
+#include <string.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+struct filetable{
+    char name[20];
+    int nob,block[30];
+
+}ft[30];
+struct block
+{
+    int block_num;
+};
+int main(){
+int i,j,n,block_number,add_block;
+char s[100];
+printf("\n Enter The Number of Files: ");
+scanf("%i",&n);
+for(i=0;i<n;i++)
+{
+printf("\n Enter Name of File %i: ",i+1);
+scanf("%s",ft[i].name);
+printf("\n Enter Total Number Of Blocks: ");
+scanf("%i",&block_number);
+ft[i].nob=block_number;
+for(j=0;j<block_number;j++)
+{
+printf("\n Enter Block Address %i: ",j+1);
+struct block *ptr;
+ptr=&(ft[i].block[j]);
+scanf("%i",&add_block);
+ptr->block_num=add_block;
+}
+}
+printf("\n Enter the name of the file you want to search: ");
+scanf("%s",s);
+for(i=0;i<n;i++)
+{
+    if(strcmp(s,ft[i].name)==0)
+    {
+        printf("\nFile Name     Start Block     No of Blocks        Blocks Occupied\n");
+        printf("\n%s\t\t%i\t\t%i\t\t",ft[i].name,ft[i].block[0],ft[i].nob);
+        struct block *pptr;
+        for(j=0;j<ft[i].nob;j++)
+        {
+            pptr=&(ft[i].block[j]);
+            printf("%i\t",pptr->block_num);
+        }
+        printf("\n");
+    }
+}
+    return 0;
+}
