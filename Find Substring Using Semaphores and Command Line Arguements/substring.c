@@ -31,7 +31,7 @@ sem_post(&mutex);
 
 int main(int argc,char *argv[])
 {
-sem_init(&mutex, 0,1); 
+sem_init(&mutex, 0,1);  
 int fd;
 char *data; 
 int substring=(strlen(argv[1]));
